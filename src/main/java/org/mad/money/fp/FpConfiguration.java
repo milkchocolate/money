@@ -15,13 +15,13 @@ public class FpConfiguration {
     public Function<BigDecimal, BigDecimal> calculateFinalPriceForListingPrice(
             @Value("${money.discount.rate}") String discountRateString,
             @Value("${money.tax.rate}") String taxRateString,
-            BiFunction<BigDecimal, BigDecimal, BigDecimal> applyDiscount,
-            BiFunction<BigDecimal, BigDecimal, BigDecimal> applyTax,
+            BiFunction<BigDecimal, BigDecimal, BigDecimal> applyDiscountFunction,
+            BiFunction<BigDecimal, BigDecimal, BigDecimal> applyTaxFunction,
             CalculateFinalPriceFunction calculateFinalPriceFunction
     ) {
         var discountRate = new BigDecimal(discountRateString);
         var taxRate = new BigDecimal(taxRateString);
-        return generateCurriedCalculateFinalPrice(discountRate, taxRate, applyDiscount, applyTax, calculateFinalPriceFunction);
+        return generateCurriedCalculateFinalPrice(discountRate, taxRate, applyDiscountFunction, applyTaxFunction, calculateFinalPriceFunction);
     }
 
     private Function<BigDecimal, BigDecimal> generateCurriedCalculateFinalPrice(

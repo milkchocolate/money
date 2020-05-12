@@ -6,10 +6,9 @@ import java.math.BigDecimal;
 import java.util.function.BiFunction;
 
 @Component
-public class ApplyDiscount implements BiFunction<BigDecimal, BigDecimal, BigDecimal> {
+public class ApplyTaxFunction implements BiFunction<BigDecimal, BigDecimal, BigDecimal> {
     @Override
     public BigDecimal apply(BigDecimal rate, BigDecimal amount) {
-        var discount = amount.multiply(rate);
-        return amount.add(discount.negate());
+        return amount.multiply(rate).add(amount);
     }
 }
